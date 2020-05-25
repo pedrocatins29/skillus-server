@@ -1,8 +1,8 @@
-// import express from "express";
+import express from "express";
 // import { ApolloServer } from "apollo-server-express";
 // import { gql } from "apollo-server";
 // import db from "./config/connection";
-const express = require("express");
+// const express = require("express");
 const app = express();
 
 // const typeDefs = gql`
