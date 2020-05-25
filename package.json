@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "apollo-server": "^2.13.1",
+    "apollo-server-express": "^2.13.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "graphql": "^15.0.0",
+    "graphql-tools": "^5.0.0",
+    "mysql": "^2.18.1"
+  },
+  "scripts": {
+    "start": "nodemon --exec babel-node src/index.js"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@babel/node": "^7.8.7",
+    "@babel/preset-env": "^7.9.6",
+    "nodemon": "^2.0.4"
+  }
+}
