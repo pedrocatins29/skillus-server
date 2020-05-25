@@ -39,5 +39,7 @@ app.listen(port, () => {
 });
 
 app.get("/", (req, res) => {
-  res.send("Hello Skillus");
+  res.send(
+    "Hello Skillus FINALMENTE COM CICD FUNCIONANDO COM ACTIONS DO GITHUB"
+  );
 });
