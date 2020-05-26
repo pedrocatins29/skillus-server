@@ -2,7 +2,19 @@ import express from "express";
 import { ApolloServer } from "apollo-server-express";
 import { gql } from "apollo-server";
 import db from "./config/connection";
+import helmet from "helmet";
+import morgan from "morgan";
+import cors from "cors";
+
 const app = express();
+
+app.use(helmet());
+app.use(morgan("common"));
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+  })
+);
 
 const typeDefs = gql`
   type Query {
@@ -25,7 +37,7 @@ const resolvers = {
   },
 };
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 
 const apolloServer = new ApolloServer({
   typeDefs,
