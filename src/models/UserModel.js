@@ -18,13 +18,18 @@ export const userModel = {
 
   get(id) {
     return new Promise((resolve, reject) => {
-      db.query(`SELECT * FROM user WHERE id = ${id}`, (error, result) => {
-        if (error) {
-          reject(error);
-        } else {
-          resolve(result[0]);
+      db.query(
+        `SELECT U.*, US.name AS status
+        FROM user U
+        INNER JOIN user_status US ON US.id = U.user_status_id WHERE U.id = ${id}`,
+        (error, result) => {
+          if (error) {
+            reject(error);
+          } else {
+            resolve(result[0]);
+          }
         }
-      });
+      );
     });
   },
 
