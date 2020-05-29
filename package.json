@@ -20,10 +20,12 @@
     "clean": "rm -rf build && mkdir build",
     "build": "npm run clean && npm run build-babel",
     "start": "node ./build/index.js",
-    "dev": "nodemon --exec babel-node src/index.js"
+    "dev": "nodemon --exec babel-node src/index.js",
+    "lint": "eslint ./src"
   },
   "devDependencies": {
     "@babel/node": "^7.8.7",
+    "eslint": "^7.1.0",
     "nodemon": "^2.0.4"
   }
 }

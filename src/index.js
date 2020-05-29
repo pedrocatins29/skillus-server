@@ -1,7 +1,6 @@
 import express from "express";
 import { ApolloServer } from "apollo-server-express";
 import helmet from "helmet";
-import morgan from "morgan";
 import cors from "cors";
 import { userType } from "./graphql/User/UserType";
 import { userResolver } from "./graphql/User/UserResolver";
@@ -10,10 +9,10 @@ import { skillType } from "./graphql/Skill/SkillType";
 import { contactType } from "./graphql/Contact/ContactType";
 import { skillResolver } from "./graphql/Skill/SkillResolver";
 import { mutationType } from "./graphql/Mutation";
+
 const app = express();
 
 app.use(helmet());
-// app.use(morgan("common"));
 app.use(
   cors({
     origin: "http://localhost:3000",
