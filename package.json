@@ -13,7 +13,8 @@
     "graphql-tools": "^5.0.0",
     "helmet": "^3.22.0",
     "morgan": "^1.10.0",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "regenerator-runtime": "^0.13.5"
   },
   "scripts": {
     "build-babel": "babel -d ./build ./src -s",

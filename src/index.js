@@ -1,5 +1,6 @@
 import express from "express";
 import { ApolloServer } from "apollo-server-express";
+import "regenerator-runtime/runtime.js";
 import helmet from "helmet";
 import cors from "cors";
 import { userType } from "./graphql/User/UserType";
