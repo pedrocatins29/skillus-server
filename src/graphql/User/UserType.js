@@ -1,6 +1,10 @@
 import { gql } from "apollo-server";
 
 export const userType = gql`
+  type loginResponse {
+    accessToken: String
+  }
+
   type User {
     id: ID
     name: String
