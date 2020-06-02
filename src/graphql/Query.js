@@ -1,10 +1,13 @@
-import {gql} from "apollo-server"
+import { gql } from "apollo-server";
 
 export const queryType = gql`
-    type Query {
-        user(id: ID!) : User
-        users: [User]   
-        skill(id: ID!) : Skill
-        skills: [Skill]
-    }
+  type Query {
+    user(id: ID!): User
+    users: [User]
+    skill(id: ID!): Skill
+    skills: [Skill]
+    eu: User
+    authenticationError: String
+    readError: String
+  }
 `;

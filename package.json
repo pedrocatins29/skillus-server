@@ -6,12 +6,14 @@
     "apollo-server": "^2.13.1",
     "apollo-server-express": "^2.13.1",
     "bcrypt": "^4.0.1",
+    "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "graphql": "^15.0.0",
     "graphql-tools": "^5.0.0",
     "helmet": "^3.22.0",
+    "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
     "regenerator-runtime": "^0.13.5"
@@ -19,7 +21,7 @@
   "scripts": {
     "build-babel": "babel -d ./build ./src -s",
     "clean": "rm -rf build && mkdir build",
-    "build": "npm run clean && npm run build-babel",
+    "build": "yarn clean && yarn build-babel",
     "start": "node ./build/index.js",
     "dev": "nodemon --exec babel-node src/index.js",
     "lint": "eslint ./src"

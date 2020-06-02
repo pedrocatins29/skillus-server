@@ -1,7 +1,19 @@
-import db from "../config/database";
-import { hash } from "bcrypt";
+import db from "../config/connection";
 
 export const userModel = {
+  findUserByParam(param, email) {
+    const query = `select * from user where ${param} = "${email}"`;
+    return new Promise((resolve, reject) => {
+      db.query(query, (error, result) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(result[0]);
+        }
+      });
+    });
+  },
+
   all() {
     return new Promise((resolve, reject) => {
       const query = `SELECT U.*, US.name AS status
@@ -25,6 +37,7 @@ export const userModel = {
         INNER JOIN user_status US ON US.id = U.user_status_id WHERE U.id = ${id}`,
         (error, result) => {
           if (error) {
+            console.log(error);
             reject(error);
           } else {
             resolve(result[0]);
@@ -81,30 +94,4 @@ export const userModel = {
   },
 
   //mutations
-
-  async register(
-    name,
-    email,
-    password,
-    telephone,
-    media,
-    date_creation,
-    user_status_id,
-    description,
-    photo
-  ) {
-    const hashedPassword = await hash(password, 12);
-    return new Promise((resolve, reject) => {
-      db.query(
-        `INSERT INTO user(name,email,password,telephone,media,date_creation,user_status_id,description,photo)VALUES("${name}","${email}","${hashedPassword}","${telephone}",${media},"${date_creation}",${user_status_id},"${description}","${photo}")`,
-        (error, result) => {
-          if (error) {
-            reject(error);
-          } else {
-            resolve(result);
-          }
-        }
-      );
-    });
-  },
 };

@@ -13,5 +13,9 @@ export const mutationType = gql`
       description: String
       photo: String
     ): Boolean
+
+    login(email: String!, password: String!): loginResponse
+
+    logout: Boolean
   }
 `;
