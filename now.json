@@ -1,0 +1,24 @@
+{
+  "version": 2,
+  "name": "skillus-server",
+  "builds": [
+    {
+      "src": "/build/index.js",
+      "use": "@now/node-server",
+      "config": {
+        "maxLambdaSize": "50mb"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "headers": {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "X-Requested-With, Content-Type, Accept"
+      },
+      "src": "/.*",
+      "dest": "/build/index.js"
+    }
+  ]
+}
