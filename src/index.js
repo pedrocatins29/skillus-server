@@ -16,25 +16,32 @@ import { errorResolver } from "./graphql/Error/ErrorResolver";
 import { AuthResolver } from "./graphql/Auth/AuthResolver";
 import { AuthType } from "./graphql/Auth/AuthType";
 import { refreshToken } from "./controller/Auth/refreshToken";
+import morgan from "morgan";
 
 const app = express();
 
 app.use(helmet());
 app.use(
   cors({
-    origin: "http://localhost:3000",
     maxAge: 86400,
     credentials: true,
   })
 );
+app.use(morgan("common"));
 
 app.use("/refresh_token", cookieParser());
 
+app.get("/", (req, res) => {
+  res.send("hello pelo now agr");
+});
+
 app.post("/refresh_token", refreshToken);
+console.log(process.env.PORT);
 
 const port = process.env.PORT || 4000;
 
 const apolloServer = new ApolloServer({
+  playground: true,
   typeDefs: [
     userType,
     queryType,
@@ -58,7 +65,7 @@ const apolloServer = new ApolloServer({
   },
 });
 
-apolloServer.applyMiddleware({ app, cors: false });
+apolloServer.applyMiddleware({ app });
 
 app.listen(port, () => {
   console.log("API RODANDO COM SUCESSO");
