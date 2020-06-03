@@ -31,12 +31,7 @@ app.use(morgan("common"));
 
 app.use("/refresh_token", cookieParser());
 
-app.get("/", (req, res) => {
-  res.send("hello pelo now agr");
-});
-
 app.post("/refresh_token", refreshToken);
-console.log(process.env.PORT);
 
 const port = process.env.PORT || 4000;
 
@@ -53,20 +48,20 @@ const apolloServer = new ApolloServer({
   ],
   resolvers: [userResolver, skillResolver, errorResolver, AuthResolver],
   context: ({ req, res }) => ({ req, res }),
-  formatError: (err) => {
-    if (
-      err.message.startsWith(
-        "ER_PARSE_ERROR: You have an error in your SQL syntax;"
-      )
-    ) {
-      return new Error("Internal server error");
-    }
+  // formatError: (err) => {
+  //   if (
+  //     err.message.startsWith(
+  //       "ER_PARSE_ERROR: You have an error in your SQL syntax;"
+  //     )
+  //   ) {
+  //     return new Error("Internal server error");
+  //   }
 
-    return err;
-  },
+  //   return err;
+  // },
 });
 
-apolloServer.applyMiddleware({ app });
+apolloServer.applyMiddleware({ app, cors: false });
 
 app.listen(port, () => {
   console.log("API RODANDO COM SUCESSO");
