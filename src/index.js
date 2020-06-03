@@ -42,6 +42,7 @@ const port = process.env.PORT || 4000;
 
 const apolloServer = new ApolloServer({
   playground: true,
+  introspection: true,
   typeDefs: [
     userType,
     queryType,
