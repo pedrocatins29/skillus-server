@@ -53,7 +53,7 @@ export const userModel = {
     password,
     telephone,
     media,
-    dateCreation,
+    date_creation,
     user_status_id,
     description,
     photo
@@ -61,7 +61,7 @@ export const userModel = {
     const hashedPassword = await hash(password, 12);
     return new Promise((resolve, reject) => {
       db.query(
-        `INSERT INTO user(name,email,password,telephone,media,date_creation,user_status_id,description,photo)VALUES("${name}","${email}","${hashedPassword}","${telephone}",${media},"${dateCreation}",${user_status_id},"${description}","${photo}")`,
+        `INSERT INTO user(name,email,password,telephone,media,date_creation,user_status_id,description,photo)VALUES("${name}","${email}","${hashedPassword}","${telephone}",${media},"${date_creation}",${user_status_id},"${description}","${photo}")`,
         (error, result) => {
           if (error) {
             reject(error);

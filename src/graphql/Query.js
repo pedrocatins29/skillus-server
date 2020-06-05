@@ -9,5 +9,7 @@ export const queryType = gql`
     eu: User
     authenticationError: String
     readError: String
+    problem(id: ID!): Problem
+    problems: [Problem]
   }
 `;

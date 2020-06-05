@@ -32,7 +32,7 @@ export const userResolver = {
           args.password,
           args.telephone,
           args.media,
-          args.dateCreation,
+          args.date_creation,
           args.user_status,
           args.description,
           args.photo

@@ -16,6 +16,8 @@ import { errorResolver } from "./graphql/Error/ErrorResolver";
 import { AuthResolver } from "./graphql/Auth/AuthResolver";
 import { AuthType } from "./graphql/Auth/AuthType";
 import { refreshToken } from "./controller/Auth/refreshToken";
+import { problemResolver } from "./graphql/Problem/ProblemResolver";
+import { problemType } from "./graphql/Problem/ProblemType";
 // import morgan from "morgan";
 
 const app = express();
@@ -45,8 +47,15 @@ const apolloServer = new ApolloServer({
     contactType,
     mutationType,
     AuthType,
+    problemType,
   ],
-  resolvers: [userResolver, skillResolver, errorResolver, AuthResolver],
+  resolvers: [
+    userResolver,
+    skillResolver,
+    errorResolver,
+    AuthResolver,
+    problemResolver,
+  ],
   context: ({ req, res }) => ({ req, res }),
   formatError: (err) => {
     if (

@@ -6,12 +6,13 @@ export const userType = gql`
     name: String
     email: String
     telephone: String
-    dateCreation: String
+    date_creation: String
     status: String
     media: Float
     description: String
     photo: String
     skill: [Skill]
     contact: [Contact]
+    type: String
   }
 `;
