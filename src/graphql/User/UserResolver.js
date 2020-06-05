@@ -23,6 +23,28 @@ export const userResolver = {
       return result;
     },
   },
+  Mutation: {
+    async register(_, args) {
+      try {
+        await userModel.register(
+          args.name,
+          args.email,
+          args.password,
+          args.telephone,
+          args.media,
+          args.dateCreation,
+          args.user_status,
+          args.description,
+          args.photo
+        );
+      } catch (error) {
+        console.log(error);
+        return false;
+      }
+
+      return true;
+    },
+  },
 
   User: {
     skill(parent) {

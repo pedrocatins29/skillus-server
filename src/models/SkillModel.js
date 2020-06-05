@@ -24,4 +24,19 @@ export const skillModel = {
       });
     });
   },
+
+  getCategory(categoryId) {
+    return new Promise((resolve, reject) => {
+      db.query(
+        `SELECT * FROM skill_category WHERE id=${categoryId}`,
+        (error, result) => {
+          if (error) {
+            reject(error);
+          } else {
+            resolve(result[0]);
+          }
+        }
+      );
+    });
+  },
 };

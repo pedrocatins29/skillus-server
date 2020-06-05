@@ -16,7 +16,7 @@ import { errorResolver } from "./graphql/Error/ErrorResolver";
 import { AuthResolver } from "./graphql/Auth/AuthResolver";
 import { AuthType } from "./graphql/Auth/AuthType";
 import { refreshToken } from "./controller/Auth/refreshToken";
-import morgan from "morgan";
+// import morgan from "morgan";
 
 const app = express();
 
@@ -27,7 +27,7 @@ app.use(
     credentials: true,
   })
 );
-app.use(morgan("common"));
+// app.use(morgan("common"));
 
 app.use("/refresh_token", cookieParser());
 
@@ -48,17 +48,17 @@ const apolloServer = new ApolloServer({
   ],
   resolvers: [userResolver, skillResolver, errorResolver, AuthResolver],
   context: ({ req, res }) => ({ req, res }),
-  // formatError: (err) => {
-  //   if (
-  //     err.message.startsWith(
-  //       "ER_PARSE_ERROR: You have an error in your SQL syntax;"
-  //     )
-  //   ) {
-  //     return new Error("Internal server error");
-  //   }
+  formatError: (err) => {
+    if (
+      err.message.startsWith(
+        "ER_PARSE_ERROR: You have an error in your SQL syntax;"
+      )
+    ) {
+      return new Error("Internal server error");
+    }
 
-  //   return err;
-  // },
+    return err;
+  },
 });
 
 apolloServer.applyMiddleware({ app, cors: false });

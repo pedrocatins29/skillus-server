@@ -8,13 +8,13 @@ export const mutationType = gql`
       password: String!
       telephone: String
       media: Float
-      date_creation: String
+      dateCreation: String
       user_status: Int
       description: String
       photo: String
     ): Boolean
 
-    login(email: String!, password: String!): loginResponse
+    login(email: String!, password: String!): LoginResponse
 
     logout: Boolean
   }

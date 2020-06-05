@@ -1,6 +1,5 @@
-import { hash, compare } from "bcrypt";
+import { compare } from "bcrypt";
 import { verify } from "jsonwebtoken";
-import db from "../config/connection";
 import {
   createAccessToken,
   createRefreshToken,
@@ -25,40 +24,17 @@ export const AuthModel = {
     }
   },
 
-  async revokeRefreshTokensForUser(userId){
-    const response = await userModel.get(userId)
+  logout(context) {
+    sendRefreshToken(context.res, "");
+    return true;
   },
 
-  // async revokeRefreshTokensForUser(context) {
-  //   sendRefreshToken(context.res, "");
+  // async revokeRefreshTokensForUser(userId) {
+  //   const response = await db.query(
+  //     `UPDATE user SET tokenVersion = tokenVersion+1 WHERE (id = ${userId});`
+  //   );
   //   return true;
   // },
-
-  async register(
-    name,
-    email,
-    password,
-    telephone,
-    media,
-    date_creation,
-    user_status_id,
-    description,
-    photo
-  ) {
-    const hashedPassword = await hash(password, 12);
-    return new Promise((resolve, reject) => {
-      db.query(
-        `INSERT INTO user(name,email,password,telephone,media,date_creation,user_status_id,description,photo)VALUES("${name}","${email}","${hashedPassword}","${telephone}",${media},"${date_creation}",${user_status_id},"${description}","${photo}")`,
-        (error, result) => {
-          if (error) {
-            reject(error);
-          } else {
-            resolve(result);
-          }
-        }
-      );
-    });
-  },
 
   async login(email, password, context) {
     const user = await userModel.findUserByParam("email", email);

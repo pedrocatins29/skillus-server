@@ -23,7 +23,6 @@ export const refreshToken = async (req, res) => {
   }
 
   const user = await userModel.get(payload.userId);
-
   if (!user) {
     return res.send({ ok: false, accessToken: "" });
   }

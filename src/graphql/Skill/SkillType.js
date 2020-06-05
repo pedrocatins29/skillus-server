@@ -1,9 +1,15 @@
-import { gql } from "apollo-server"
+import { gql } from "apollo-server";
 
 export const skillType = gql`
-    type Skill {
-        id: ID
-        name: String
-        rating: Float
-    }
+  type Skill {
+    id: ID
+    name: String
+    rating: Float
+    category: Category
+  }
+
+  type Category {
+    id: ID
+    name: String
+  }
 `;

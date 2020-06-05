@@ -6,7 +6,7 @@ export const userType = gql`
     name: String
     email: String
     telephone: String
-    date_creation: String
+    dateCreation: String
     status: String
     media: Float
     description: String
