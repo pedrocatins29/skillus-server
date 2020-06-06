@@ -4,7 +4,7 @@
     "@babel/core": "^7.9.6",
     "@babel/preset-env": "^7.9.6",
     "apollo-server": "^2.13.1",
-    "apollo-server-express": "^2.13.1",
+    "apollo-server-express": "^2.14.2",
     "bcrypt": "^4.0.1",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
