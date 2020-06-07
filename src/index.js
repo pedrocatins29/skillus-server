@@ -22,14 +22,14 @@ import morgan from "morgan";
 
 const app = express();
 
-app.use(helmet());
 app.use(
   cors({
     origin: "http://localhost:3000",
-    maxAge: 86400,
+    // maxAge: 86400,
     credentials: true,
   })
 );
+app.use(helmet());
 app.use(morgan("tiny"));
 
 app.use("/refresh_token", cookieParser());
