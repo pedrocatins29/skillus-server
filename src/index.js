@@ -18,7 +18,7 @@ import { AuthType } from "./graphql/Auth/AuthType";
 import { refreshToken } from "./controller/Auth/refreshToken";
 import { problemResolver } from "./graphql/Problem/ProblemResolver";
 import { problemType } from "./graphql/Problem/ProblemType";
-// import morgan from "morgan";
+import morgan from "morgan";
 
 const app = express();
 
@@ -29,7 +29,7 @@ app.use(
     credentials: true,
   })
 );
-// app.use(morgan("common"));
+app.use(morgan("tiny"));
 
 app.use("/refresh_token", cookieParser());
 
