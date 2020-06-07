@@ -52,16 +52,14 @@ export const userModel = {
     email,
     password,
     telephone,
-    media,
     date_creation,
-    user_status_id,
     description,
     photo
   ) {
     const hashedPassword = await hash(password, 12);
     return new Promise((resolve, reject) => {
       db.query(
-        `INSERT INTO user(name,email,password,telephone,media,date_creation,user_status_id,description,photo)VALUES("${name}","${email}","${hashedPassword}","${telephone}",${media},"${date_creation}",${user_status_id},"${description}","${photo}")`,
+        `INSERT INTO user(name,email,password,telephone,date_creation,description,photo)VALUES("${name}","${email}","${hashedPassword}","${telephone}","${date_creation}","${description}","${photo}")`,
         (error, result) => {
           if (error) {
             reject(error);
@@ -79,6 +77,39 @@ export const userModel = {
             INNER JOIN skill S on S.id = US.skill_id 
             WHERE US.user_id = ${userId} order by rating DESC`;
       db.query(query, (error, result) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(result);
+        }
+      });
+    });
+  },
+
+  newUserContact(userId, value) {
+    const contactId = [1, 2];
+    const data = contactId.map((contact, index) => [
+      userId,
+      contact,
+      value[index],
+    ]);
+    return new Promise((resolve, reject) => {
+      const query = `INSERT INTO user_contact(user_id,contact_id,value)VALUES ?`;
+      db.query(query, [data], (error, result) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(result);
+        }
+      });
+    });
+  },
+
+  newUserSkill(userId, skillId) {
+    const data = skillId.map((skill) => [userId, skill]);
+    return new Promise((resolve, reject) => {
+      const query = `INSERT INTO user_skill(user_id,skill_id)VALUES ?`;
+      db.query(query, [data], (error, result) => {
         if (error) {
           reject(error);
         } else {

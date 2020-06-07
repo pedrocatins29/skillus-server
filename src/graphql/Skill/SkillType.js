@@ -6,6 +6,8 @@ export const skillType = gql`
     name: String
     rating: Float
     category: Category
+    color: String
+    icon: String
   }
 
   type Category {

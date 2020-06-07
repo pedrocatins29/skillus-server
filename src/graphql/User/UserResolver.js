@@ -26,17 +26,17 @@ export const userResolver = {
   Mutation: {
     async register(_, args) {
       try {
-        await userModel.register(
+        const response = await userModel.register(
           args.name,
           args.email,
           args.password,
           args.telephone,
-          args.media,
           args.date_creation,
-          args.user_status,
           args.description,
           args.photo
         );
+        await userModel.newUserContact(response.insertId, args.contact);
+        await userModel.newUserSkill(response.insertId, args.skill);
       } catch (error) {
         console.log(error);
         return false;

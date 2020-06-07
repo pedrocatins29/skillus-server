@@ -9,9 +9,10 @@ export const mutationType = gql`
       telephone: String
       media: Float
       date_creation: String
-      user_status: Int
       description: String
       photo: String
+      skill: [Int]
+      contact: [String]
     ): Boolean
     login(email: String!, password: String!): LoginResponse
     createSkill(name: String, category_id: Int): Skill
