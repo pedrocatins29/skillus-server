@@ -14,17 +14,14 @@ export const mutationType = gql`
       photo: String
     ): Boolean
     login(email: String!, password: String!): LoginResponse
+    createSkill(name: String, category_id: Int): Skill
     logout: Boolean
     createProblem(
       name: String
       description: String
       date_creation: String
-      date_close: String
-      date_deadline: String
-      status: Int
       createdBy: Int
-      skill: Int
-      type: Int
-    ): Problem
+      skill: [Int]
+    ): Boolean
   }
 `;

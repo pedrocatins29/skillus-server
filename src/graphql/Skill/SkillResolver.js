@@ -10,6 +10,13 @@ export const skillResolver = {
       return skillModel.get(args.id);
     },
   },
+
+  Mutation: {
+    createSkill(_, args) {
+      skillModel.new(args.name, args.category_id);
+    },
+  },
+
   Skill: {
     category(parent) {
       return skillModel.getCategory(parent.skill_category_id);

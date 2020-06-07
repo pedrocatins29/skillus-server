@@ -7,7 +7,6 @@ export const createAccessToken = (user) => {
 };
 
 export const createRefreshToken = (user) => {
-  console.log(user.tokenVersion);
   return sign(
     { userId: user.id, tokenVersion: user.tokenVersion },
     process.env.REFRESH_TOKEN_SECRET,

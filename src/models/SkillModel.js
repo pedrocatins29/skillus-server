@@ -25,6 +25,21 @@ export const skillModel = {
     });
   },
 
+  new(name, category_id) {
+    return new Promise((resolve, reject) => {
+      db.query(
+        `INSERT INTO skill(name,skill_category_id)VALUES("${name}", ${category_id})`,
+        (error, result) => {
+          if (error) {
+            reject(error);
+          } else {
+            resolve(result[0]);
+          }
+        }
+      );
+    });
+  },
+
   getCategory(categoryId) {
     return new Promise((resolve, reject) => {
       db.query(

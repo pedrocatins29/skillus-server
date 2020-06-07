@@ -31,6 +31,35 @@ export const problemModel = {
     });
   },
 
+  new(name, description, date_creation) {
+    return new Promise((resolve, reject) => {
+      db.query(
+        `INSERT INTO problem(name,description,date_creation)VALUES("${name}","${description}","${date_creation}")`,
+        (error, result) => {
+          if (error) {
+            reject(error);
+          } else {
+            resolve(result);
+          }
+        }
+      );
+    });
+  },
+
+  newProblemSkill(skillId, problemId) {
+    const data = skillId.map((skill) => [problemId, skill]);
+    return new Promise((resolve, reject) => {
+      const query = `INSERT INTO problem_skill(problem_id,skill_id) VALUES ?`;
+      db.query(query, [data], (error, result) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(result);
+        }
+      });
+    });
+  },
+
   problemStatus(id) {
     return new Promise((resolve, reject) => {
       db.query(
@@ -39,7 +68,21 @@ export const problemModel = {
           if (error) {
             reject(error);
           } else {
-            resolve(result[0]);
+            resolve(result);
+          }
+        }
+      );
+    });
+  },
+  problemUser(problemId, userId) {
+    return new Promise((resolve, reject) => {
+      db.query(
+        `INSERT INTO problem_user(problem_id,user_id)VALUES(${problemId},${userId})`,
+        (error, result) => {
+          if (error) {
+            reject(error);
+          } else {
+            resolve(result);
           }
         }
       );
