@@ -18,7 +18,7 @@ export const createRefreshToken = (user) => {
 
 export const sendRefreshToken = (res, token) => {
   res.cookie("chicoMedio", token, {
-    htypOnly: true,
-    path: "/",
+    httpOnly: true,
+    path: "/refresh_token",
   });
 };
