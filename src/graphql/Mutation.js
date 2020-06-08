@@ -8,7 +8,6 @@ export const mutationType = gql`
       password: String!
       telephone: String
       media: Float
-      date_creation: String
       description: String
       photo: String
       skill: [Int]
@@ -20,7 +19,6 @@ export const mutationType = gql`
     createProblem(
       name: String
       description: String
-      date_creation: String
       createdBy: Int
       skill: [Int]
     ): Boolean

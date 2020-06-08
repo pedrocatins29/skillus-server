@@ -11,11 +11,7 @@ export const problemResolver = {
   },
   Mutation: {
     async createProblem(_, args) {
-      const result = await problemModel.new(
-        args.name,
-        args.description,
-        args.date_creation
-      );
+      const result = await problemModel.new(args.name, args.description);
       const skillResult = await problemModel.newProblemSkill(
         args.skill,
         result.insertId

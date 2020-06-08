@@ -31,7 +31,6 @@ export const userResolver = {
           args.email,
           args.password,
           args.telephone,
-          args.date_creation,
           args.description,
           args.photo
         );

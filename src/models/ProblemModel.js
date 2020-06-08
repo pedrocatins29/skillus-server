@@ -31,10 +31,10 @@ export const problemModel = {
     });
   },
 
-  new(name, description, date_creation) {
+  new(name, description) {
     return new Promise((resolve, reject) => {
       db.query(
-        `INSERT INTO problem(name,description,date_creation)VALUES("${name}","${description}","${date_creation}")`,
+        `INSERT INTO problem(name,description)VALUES("${name}","${description}")`,
         (error, result) => {
           if (error) {
             reject(error);

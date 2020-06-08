@@ -47,19 +47,11 @@ export const userModel = {
       );
     });
   },
-  async register(
-    name,
-    email,
-    password,
-    telephone,
-    date_creation,
-    description,
-    photo
-  ) {
+  async register(name, email, password, telephone, description, photo) {
     const hashedPassword = await hash(password, 12);
     return new Promise((resolve, reject) => {
       db.query(
-        `INSERT INTO user(name,email,password,telephone,date_creation,description,photo)VALUES("${name}","${email}","${hashedPassword}","${telephone}","${date_creation}","${description}","${photo}")`,
+        `INSERT INTO user(name,email,password,telephone,description,photo)VALUES("${name}","${email}","${hashedPassword}","${telephone}","${description}","${photo}")`,
         (error, result) => {
           if (error) {
             reject(error);
