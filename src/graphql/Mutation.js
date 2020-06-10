@@ -21,6 +21,6 @@ export const mutationType = gql`
       description: String
       createdBy: Int
       skill: [Int]
-    ): Boolean
+    ): Problem
   }
 `;

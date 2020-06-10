@@ -26,7 +26,7 @@ export const problemResolver = {
         skillResult.affectedRows &&
         problemUser.affectedRows
       ) {
-        return true;
+        return problemModel.get(result.insertId);
       }
 
       return new Error("Algo errado com seu problema");
