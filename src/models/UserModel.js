@@ -138,5 +138,17 @@ export const userModel = {
         });
     },
 
-    //mutations
+    updateUserSkillRating(userId, skillId, note) {
+        return new Promise((resolve, reject) => {
+            const query = `CALL MEDIA_SKILL(${userId}, ${skillId}, ${note})`;
+
+            db.query(query, (error, result) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(result);
+                }
+            });
+        });
+    },
 };

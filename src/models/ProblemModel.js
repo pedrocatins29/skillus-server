@@ -1,5 +1,6 @@
 import db from "../config/connection";
 import { ratingModel } from "../models/RatingModel";
+import { userModel } from "../models/UserModel";
 
 export const problemModel = {
     all() {
@@ -148,14 +149,19 @@ export const problemModel = {
         });
     },
 
-    updateProblemStatus(problemId, status) {
+    async updateProblemStatus(problemId, status, note) {
         const query = `UPDATE problem SET problem_status_id = ${status} WHERE id = ${problemId}`;
+        const skills = await this.listProblemSkill(problemId);
+        const helper = await this.getHelper(problemId);
 
         return new Promise((resolve, reject) => {
-            db.query(query, (error, result) => {
+            db.query(query, async (error, result) => {
                 if (error) {
                     reject(error);
                 } else {
+                    for (const skill of skills) {
+                        await userModel.updateUserSkillRating(helper.id, skill.id, note);
+                    }
                     resolve(result);
                 }
             });
@@ -168,7 +174,7 @@ export const problemModel = {
                 if (error) reject(error);
                 try {
                     db.query("START TRANSACTION");
-                    await this.updateProblemStatus(problemId, 3);
+                    await this.updateProblemStatus(problemId, 3, note);
                     await ratingModel.new(problemId, note, comment);
                     db.query("COMMIT");
                     connection.release();
