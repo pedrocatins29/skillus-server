@@ -1,46 +1,62 @@
 import { problemModel } from "../../models/ProblemModel";
 
 export const problemResolver = {
-  Query: {
-    problem(_, args) {
-      return problemModel.get(args.id);
+    Query: {
+        problem(_, args) {
+            return problemModel.get(args.id);
+        },
+        problems() {
+            return problemModel.all();
+        },
     },
-    problems() {
-      return problemModel.all();
-    },
-  },
-  Mutation: {
-    async createProblem(_, args) {
-      const result = await problemModel.new(args.name, args.description);
-      const skillResult = await problemModel.newProblemSkill(
-        args.skill,
-        result.insertId
-      );
-      const problemUser = await problemModel.problemUser(
-        result.insertId,
-        args.createdBy
-      );
 
-      if (
-        result.affectedRows &&
-        skillResult.affectedRows &&
-        problemUser.affectedRows
-      ) {
-        return problemModel.get(result.insertId);
-      }
+    Mutation: {
+        async createProblem(_, args) {
+            const result = await problemModel.new(args.name, args.description);
+            const skillResult = await problemModel.newProblemSkill(args.skill, result.insertId);
+            const problemUser = await problemModel.problemUser(result.insertId, args.createdBy);
 
-      return new Error("Algo errado com seu problema");
-    },
-  },
+            if (result.affectedRows && skillResult.affectedRows && problemUser.affectedRows) {
+                return problemModel.get(result.insertId);
+            }
 
-  Problem: {
-    comment() {},
+            return new Error("Algo errado com seu problema");
+        },
 
-    createdBy(parent) {
-      return problemModel.createdBy(parent.id);
+        async addProblemHelper(_, args) {
+            const result = await problemModel.addProblemHelper(args.problem_id, args.user_id);
+            const resultStatus = await problemModel.updateProblemStatus(result.insertId, 2);
+            console.log(resultStatus);
+
+            if (result.affectedRows && resultStatus) {
+                return problemModel.get(args.problem_id);
+            }
+
+            return new Error("Erro ao tentar ingressar no problema!");
+        },
+
+        async closeProblem(_, args) {
+            const result = await problemModel.closeProblem(args.problem_id, args.note, args.comment);
+
+            if (result === true) {
+                return problemModel.get(args.problem_id);
+            }
+        },
     },
-    skill(parent) {
-      return problemModel.problemSkill(parent.id);
+
+    Problem: {
+        comment() {},
+
+        creator(parent) {
+            return problemModel.getCreator(parent.id);
+        },
+
+        helper(parent) {
+            return problemModel.getHelper(parent.id);
+        },
+
+        skill(parent) {
+            return problemModel.listProblemSkill(parent.id);
+        },
     },
-  },
 };
