@@ -11,5 +11,7 @@ export const queryType = gql`
         readError: String
         problem(id: ID!): Problem
         problems: [Problem]
+        problemsByUser(user_id: ID!): [Problem]
+        ratings(user_id: ID!): [Rating]
     }
 `;

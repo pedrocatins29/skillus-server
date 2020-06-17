@@ -1,11 +1,9 @@
 import { gql } from "apollo-server";
 
-export const RatingType = gql`
+export const ratingType = gql`
     type Rating {
         id: ID
         problem_id: ID
-        creator: User
-        helper: User
         note: Float
         comment: String
     }

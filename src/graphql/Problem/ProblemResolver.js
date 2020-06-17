@@ -8,6 +8,9 @@ export const problemResolver = {
         problems() {
             return problemModel.all();
         },
+        problemsByUser(_, args) {
+            return problemModel.allByUser(args.user_id);
+        },
     },
 
     Mutation: {
@@ -26,7 +29,6 @@ export const problemResolver = {
         async addProblemHelper(_, args) {
             const result = await problemModel.addProblemHelper(args.problem_id, args.user_id);
             const resultStatus = await problemModel.updateProblemStatus(result.insertId, 2);
-            console.log(resultStatus);
 
             if (result.affectedRows && resultStatus) {
                 return problemModel.get(args.problem_id);

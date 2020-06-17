@@ -45,6 +45,21 @@ export const problemModel = {
         });
     },
 
+    allByUser(userId) {
+        return new Promise((resolve, reject) => {
+            db.query(
+                `SELECT P.*, PU.user_id FROM problem P INNER JOIN problem_user PU ON PU.problem_id = P.id WHERE PU.user_id = ${userId}`,
+                (error, result) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        resolve(result);
+                    }
+                }
+            );
+        });
+    },
+
     newProblemSkill(skillId, problemId) {
         const data = skillId.map((skill) => [problemId, skill]);
         return new Promise((resolve, reject) => {

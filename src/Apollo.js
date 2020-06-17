@@ -12,12 +12,13 @@ import { AuthType } from "./graphql/Auth/AuthType";
 import { problemResolver } from "./graphql/Problem/ProblemResolver";
 import { problemType } from "./graphql/Problem/ProblemType";
 import { ratingType } from "./graphql/Rating/RatingType";
+import { ratingResolver } from "./graphql/Rating/RatingResolver";
 
 export const apolloServer = new ApolloServer({
     playground: true,
     introspection: true,
-    typeDefs: [userType, queryType, skillType, contactType, mutationType, AuthType, problemType],
-    resolvers: [userResolver, skillResolver, errorResolver, AuthResolver, problemResolver],
+    typeDefs: [userType, queryType, skillType, contactType, mutationType, AuthType, problemType, ratingType],
+    resolvers: [userResolver, skillResolver, errorResolver, AuthResolver, problemResolver, ratingResolver],
     context: ({ req, res }) => ({ req, res }),
     formatError: (err) => {
         if (err.message.startsWith("ER_PARSE_ERROR: You have an error in your SQL syntax;")) {
