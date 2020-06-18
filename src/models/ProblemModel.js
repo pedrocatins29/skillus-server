@@ -200,7 +200,7 @@ export const problemModel = {
                 if (error) reject(error);
                 try {
                     db.query("START TRANSACTION");
-                    await this.updateProblemStatus(problemId, 3, note);
+                    await this.updateProblemStatus(problemId, 3);
                     await this.updateRatingUserSkill(problemId, note);
                     await ratingModel.new(problemId, note, comment);
                     db.query("COMMIT");
