@@ -168,22 +168,29 @@ export const problemModel = {
         });
     },
 
-    async updateProblemStatus(problemId, status, note) {
-        const query = `UPDATE problem SET problem_status_id = ${status} WHERE id = ${problemId}`;
+    async updateProblemStatus(problemId, status) {
+        const query = `UPDATE problem SET problem_status_id = ${status}, date_close = now() WHERE id = ${problemId}`;
+
+        return new Promise((resolve, reject) => {
+            db.query(query, (error, result) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(result);
+                }
+            });
+        });
+    },
+
+    async updateRatingUserSkill(problemId, note) {
         const skills = await this.listProblemSkill(problemId);
         const helper = await this.getHelper(problemId);
 
         return new Promise((resolve, reject) => {
-            db.query(query, async (error, result) => {
-                if (error) {
-                    reject(error);
-                } else {
-                    for (const skill of skills) {
-                        await userModel.updateUserSkillRating(helper.id, skill.id, note);
-                    }
-                    resolve(result);
-                }
-            });
+            for (const skill of skills) {
+                userModel.updateUserSkillRating(helper.id, skill.id, note);
+            }
+            resolve(true);
         });
     },
 
@@ -194,6 +201,7 @@ export const problemModel = {
                 try {
                     db.query("START TRANSACTION");
                     await this.updateProblemStatus(problemId, 3, note);
+                    await this.updateRatingUserSkill(problemId, note);
                     await ratingModel.new(problemId, note, comment);
                     db.query("COMMIT");
                     connection.release();
