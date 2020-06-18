@@ -6,11 +6,12 @@ export const problemModel = {
     all() {
         return new Promise((resolve, reject) => {
             db.query(
-                `select P.*, PS.name as status, PS.icon, PS.color from problem P inner join problem_status PS on P.problem_status_id = PS.id`,
+                `select P.*, PS.name as status, PS.icon as icon, PS.color as color from problem P inner join problem_status PS on P.problem_status_id = PS.id`,
                 (error, result) => {
                     if (error) {
                         reject(error);
                     } else {
+                        console.log(result[0]);
                         resolve(result);
                     }
                 }
@@ -21,7 +22,7 @@ export const problemModel = {
     get(id) {
         return new Promise((resolve, reject) => {
             db.query(
-                `select P.*, PS.name, PS.color, PS.icon as status from problem P inner join problem_status PS on P.problem_status_id = PS.id WHERE P.id = ${id}`,
+                `select P.*, PS.name as status, PS.color, PS.icon from problem P inner join problem_status PS on P.problem_status_id = PS.id WHERE P.id = ${id}`,
                 (error, result) => {
                     if (error) {
                         reject(error);
