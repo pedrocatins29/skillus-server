@@ -21,7 +21,7 @@ export const problemModel = {
     get(id) {
         return new Promise((resolve, reject) => {
             db.query(
-                `select P.*, PS.name as status from problem P inner join problem_status PS on P.problem_status_id = PS.id WHERE P.id = ${id}`,
+                `select P.*, PS.name, PS.color, PS.icon as status from problem P inner join problem_status PS on P.problem_status_id = PS.id WHERE P.id = ${id}`,
                 (error, result) => {
                     if (error) {
                         reject(error);
