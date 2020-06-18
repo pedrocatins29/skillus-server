@@ -11,6 +11,8 @@ export const problemType = gql`
         creator: User
         helper: User
         comment: Comment
+        color: String
+        icon: String
         skill: [Skill]
     }
 

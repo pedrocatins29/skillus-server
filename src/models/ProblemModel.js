@@ -6,7 +6,7 @@ export const problemModel = {
     all() {
         return new Promise((resolve, reject) => {
             db.query(
-                `select P.*, PS.name as status from problem P inner join problem_status PS on P.problem_status_id = PS.id`,
+                `select P.*, PS.name as status, PS.icon, PS.color from problem P inner join problem_status PS on P.problem_status_id = PS.id`,
                 (error, result) => {
                     if (error) {
                         reject(error);
@@ -48,7 +48,11 @@ export const problemModel = {
     allByUser(userId) {
         return new Promise((resolve, reject) => {
             db.query(
-                `SELECT P.*, PU.user_id FROM problem P INNER JOIN problem_user PU ON PU.problem_id = P.id WHERE PU.user_id = ${userId}`,
+                `SELECT P.*, PU.user_id, PS.name AS status, PS.color, PS.icon 
+                FROM problem P
+                INNER JOIN problem_user PU ON PU.problem_id = P.id
+                INNER JOIN problem_status PS ON PS.id = P.problem_status_id
+                WHERE PU.user_id = ${userId}`,
                 (error, result) => {
                     if (error) {
                         reject(error);
