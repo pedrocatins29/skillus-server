@@ -37,8 +37,17 @@ export const problemResolver = {
             return new Error("Erro ao tentar ingressar no problema!");
         },
 
+        async removeProblemHelper(_, args) {
+            const result = await problemModel.removeProblemHelper(args.problem_id);
+            const resultStatus = await problemModel.updateProblemStatus(args.problem_id, 1);
+
+            if (result.affectedRows && resultStatus) {
+                return problemModel.get(args.problem_id);
+            }
+            return new Error("Erro ao tentar ingressar no problema!");
+        },
+
         async closeProblem(_, args) {
-            console.log(args);
             const result = await problemModel.closeProblem(args.problem_id, args.note, args.comment);
 
             if (result === true) {

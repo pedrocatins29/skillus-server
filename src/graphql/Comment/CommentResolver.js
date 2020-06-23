@@ -15,6 +15,7 @@ export const commentResolver = {
             if (response.affectedRows > 0) {
                 return args;
             }
+            return new Error("Erro ao tentar adicionar comentário!");
         },
     },
 

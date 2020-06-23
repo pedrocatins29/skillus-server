@@ -117,6 +117,20 @@ export const problemModel = {
         });
     },
 
+    removeProblemHelper(problemId) {
+        const query = `DELETE FROM problem_user WHERE problem_id = ${problemId} AND problem_user_type_id = 2;`;
+
+        return new Promise((resolve, reject) => {
+            db.query(query, (error, result) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(result);
+                }
+            });
+        });
+    },
+
     getCreator(problemId) {
         return new Promise((resolve, reject) => {
             db.query(
