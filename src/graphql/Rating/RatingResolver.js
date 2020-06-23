@@ -9,7 +9,7 @@ export const ratingResolver = {
     },
     Rating: {
         async evaluator(parent) {
-            return problemModel.getHelper(parent.problem_id);
+            return problemModel.getCreator(parent.problem_id);
         },
     },
 };
