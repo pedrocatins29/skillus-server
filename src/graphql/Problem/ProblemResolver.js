@@ -38,6 +38,7 @@ export const problemResolver = {
         },
 
         async closeProblem(_, args) {
+            console.log(args);
             const result = await problemModel.closeProblem(args.problem_id, args.note, args.comment);
 
             if (result === true) {
@@ -47,8 +48,6 @@ export const problemResolver = {
     },
 
     Problem: {
-        comment() {},
-
         creator(parent) {
             return problemModel.getCreator(parent.id);
         },

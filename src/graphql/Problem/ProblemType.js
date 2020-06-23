@@ -10,15 +10,8 @@ export const problemType = gql`
         status: String
         creator: User
         helper: User
-        comment: Comment
         color: String
         icon: String
         skill: [Skill]
-    }
-
-    type Comment {
-        id: ID
-        text: String
-        date_creation: String
     }
 `;

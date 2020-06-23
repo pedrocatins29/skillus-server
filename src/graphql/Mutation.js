@@ -19,5 +19,6 @@ export const mutationType = gql`
         createProblem(name: String, description: String, createdBy: Int, skill: [Int]): Problem
         addProblemHelper(problem_id: ID!, user_id: ID!): Problem
         closeProblem(problem_id: ID, comment: String!, note: Float!): Problem
+        addProblemComment(text: String, problem_id: ID, user_id_sender: ID): Comment
     }
 `;

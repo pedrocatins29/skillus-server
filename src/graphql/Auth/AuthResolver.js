@@ -1,4 +1,5 @@
 import { AuthModel } from "../../models/AuthModel";
+
 export const AuthResolver = {
     Mutation: {
         async login(_, args, context) {
