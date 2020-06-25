@@ -6,5 +6,6 @@ export const ratingType = gql`
         problem_id: ID
         note: Float
         comment: String
+        evaluator: User
     }
 `;
