@@ -229,4 +229,17 @@ export const problemModel = {
             });
         });
     },
+
+    getProblemRating(problemId) {
+        const query = `SELECT * FROM rating WHERE problem_id = ${problemId}`;
+        return new Promise((resolve, reject) => {
+            db.query(query, (error, result) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(result);
+                }
+            });
+        });
+    },
 };

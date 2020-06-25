@@ -68,5 +68,9 @@ export const problemResolver = {
         skill(parent) {
             return problemModel.listProblemSkill(parent.id);
         },
+
+        rating(parent) {
+            return problemModel.getProblemRating(parent.id);
+        },
     },
 };

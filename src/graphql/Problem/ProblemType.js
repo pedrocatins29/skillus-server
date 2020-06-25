@@ -12,6 +12,7 @@ export const problemType = gql`
         helper: User
         color: String
         icon: String
+        rating: Rating
         skill: [Skill]
     }
 `;
