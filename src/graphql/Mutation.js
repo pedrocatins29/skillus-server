@@ -9,7 +9,6 @@ export const mutationType = gql`
             telephone: String
             media: Float
             description: String
-            photo: String
             skill: [Int]
             contact: [String]
         ): Boolean

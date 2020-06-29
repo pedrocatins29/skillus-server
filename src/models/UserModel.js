@@ -15,6 +15,18 @@ export const userModel = {
         });
     },
 
+    selectRandomPhoto() {
+        const query = `SELECT url FROM photo ORDER BY RAND() LIMIT 1;`;
+        return new Promise((resolve, reject) => {
+            db.query(query, (error, result) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(result[0]);
+                }
+            });
+        });
+    },
     all() {
         return new Promise((resolve, reject) => {
             const query = `SELECT U.*, US.name AS status
